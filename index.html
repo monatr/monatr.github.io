@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta name="author" content="Mona Tore" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="icon" href="favicon.ico" type="image/vnd.microsoft.icon" />
+		
+		<!-- Load CSS -->
+		<link rel="stylesheet" type="text/css" href="css/base.css" media="all" />
+		
+		<!-- Load JavaScript library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		
+		<script type="text/javascript">
+			function toggle_tab(id){
+				// Disable all tab.
+				$("#maincontainer section").css({"display":"none"});
+				$("#menubar li a").css({"color":"#999", "background-color":"inherit"});
+				// Get tab DOM.
+				if($("#maincontainer #tabs-"+id).size() <= 0){
+					id = "index";
+				}
+				// Show.
+				$("#maincontainer #tabs-"+id).fadeIn(500);
+				$("#link-"+id).css({"color":"#CCC", "background-color":"#000"});
+			}
+			$(document).ready(function(){
+				toggle_tab(window.location.hash.substr(1));
+			});
+		</script>
+		
+		<title>Home :: Mona Tore Personal Web Site</title>
+		
+	</head>
+	<body>
+		
+		<!-- Menubar -->
+		<header id="menubar"><div id="menucontainer">
+			<div style="float:left;"><a href="#index" onclick="toggle_tab('index');"><img src="img/banner.png" alt="banner image" height="60" /></a></div>
+			<ul>
+				<li><a href="#profile" id="link-profile" onclick="toggle_tab('profile');">Profile</a></li>
+				<li><a href="#portal" id="link-portal" onclick="toggle_tab('portal');">Portal</a></li>
+				<li><a href="#junk" id="link-junk" onclick="toggle_tab('junk');">Junk</a></li>
+			</ul>
+		</div></header>
+		
+		<!-- Main cointainer -->
+		<div id="maincontainer">
+			
+			<!--====================================================================================================
+			= Index
+			======================================================================================================-->
+			<section id="tabs-index" style="">
+				<h2 style="display:none;">Index</h2>
+				<div style="text-align:center;margin-top:50px;margin-bottom:50px;">
+					<a href="#profile" onclick="toggle_tab('profile');"><img src="img/icon.png" width="400" /></a>
+				</div>
+			</section>
+			
+			<!--====================================================================================================
+			= Profile
+			======================================================================================================-->
+			<section id="tabs-profile" style="">
+				<h2>Profile</h2>
+				<h3>About Me</h3>
+				<p>2013年11月ごろより暗号通貨（ビットコイン）の魅力にハマり、現在はモナーコイン関連のサービス開発を中心として活動中の研究者のたまご。</p>
+				<h3>Academic Interests</h3>
+				<p>Information Science [Cryptography, High Performance Computing], Mathematics [Number Theory], Physics [Quantum Theory, Statistical Mechanics, Thermodynamics].</p>
+				<h3>Donation</h3>
+				<ul>
+					<li><a href="monacoin:MMonatrZw9NzoFCkV9LX9yB7vE9rDbtSab">MONA</a>: MMonatrZw9NzoFCkV9LX9yB7vE9rDbtSab</li>
+					<li><a href="bitcoin:1AZYKstEvRLhYnQCheYutqyZ5oNS4SwoJw">BTC</a>: 1AZYKstEvRLhYnQCheYutqyZ5oNS4SwoJw</li>
+					<li><a href="litecoin:LduuyatCvxXemdAK195zhvkvUCwVppoPAA">LTC</a>: LduuyatCvxXemdAK195zhvkvUCwVppoPAA</li>
+					<li><a href="primecoin:AaL8nhZwhbuR9oQ7sm2E3BeJz18xePeV9S">XPM</a>: AaL8nhZwhbuR9oQ7sm2E3BeJz18xePeV9S</li>
+				</ul>
+				<h3>Links</h3>
+				<ul>
+					<li><a href="https://twitter.com/monatr_jp/">Twitter: @monatr_jp</a></li>
+					<li><a href="https://github.com/monatr/">GitHub: monatr</a></li>
+					<li>E-mail: monatr.jp[MONA]gmail.com (replace [MONA] with @).</li>
+				</ul>
+			</section>
+			
+			<!--====================================================================================================
+			= Portal
+			======================================================================================================-->
+			<section id="tabs-portal" style="display:none;">
+				<h2>Portal</h2>
+				<h3><a href="https://monatr.jp">もなとれ (mona-tore)</a></h3>
+				<p>モナーコイン（Monacoin; MONA）を基軸通貨とする世界初の暗号通貨取引所。モナーコイン（Monacoin; MONA）、ビットコイン（Bitcoin; BTC）、ライトコイン（Litecoin; LTC）、プライムコイン（Primecoin; XPM）に対応。</p>
+				<h3><a href="http://azn.monatr.jp">もなぞん。</a></h3>
+				<p>モナーコインでAmazonギフトコードを購入できるサイト。ユーザ登録からギフトコード発送まで全自動なので素早く購入できるのが特色。</p>
+			</section>
+			
+			<!--====================================================================================================
+			= Junk
+			======================================================================================================-->
+			<section id="tabs-junk" style="display:none;">
+				<h2>Junk</h2>
+				<h3>Monacoin Stat</h3>
+				<ul>
+					<li>Last Update: <span id="junk-monastat-lastupdate">???</span></li>
+					<li>Current Difficulty: <span id="junk-monastat-diff">???</span></li>
+				</ul>
+				<script type="text/javascript">
+					function junk_monastat_update(){
+						var now = new Date();
+						$("#junk-monastat-lastupdate").html(now.getFullYear()+"/"+(now.getMonth()+1)+"/"+now.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds());
+						// Difficulty
+						$.getJSON("http://abe.monash.pw/chain/Monacoin/q/getdifficulty?jsonp=?", function(data){
+							$("#junk-monastat-diff").html(data);
+						});
+						
+					}
+					$(document).ready(function(){
+						junk_monastat_update();
+						setInterval(junk_monastat_update, 60*1000);
+					});
+				</script>
+			</section>
+			
+			
+			<!--====================================================================================================
+			= Footer
+			======================================================================================================-->
+			<hr />
+			<footer>
+				<p>Copyright &copy; Mona Tore &lt;monatr.jp[MONA]gmail.com&gt; 2014.</p>
+				<p>Web site hosted by <a href="http://pages.github.com/">GitHub Pages</a>.</p>
+			</footer>
+			
+		</div>
+		
+	</body>
+</html>
+
