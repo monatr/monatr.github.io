@@ -92,6 +92,7 @@ var pairs = [
 ];
 
 function update_prices(){
+	var digits = 3;
 	$.each(pairs, function(key, pair){
 		ripple_get_bestbid(pair.base.currency, pair.base.issuer, pair.counter.currency, pair.counter.issuer, function(price){
 			if(price == null){
@@ -104,7 +105,7 @@ function update_prices(){
 				if(pair.counter.currency == "XRP"){
 					price /= 1000000;
 				}
-				var text = price.toFixed(2);
+				var text = price.toFixed(digits-1-Math.floor(Math.LOG10E*Math.log(price)));
 			}
 			$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-bid").text(text);
 		});
@@ -119,9 +120,9 @@ function update_prices(){
 				if(pair.counter.currency == "XRP"){
 					price /= 1000000;
 				}
-				var text = price.toFixed(2);
+				var text = price.toFixed(digits-1-Math.floor(Math.LOG10E*Math.log(price)));
 			}
-			$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-ask").text(price.toFixed(2));
+			$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-ask").text(text);
 		});
 	});
 }
