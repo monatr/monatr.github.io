@@ -91,39 +91,31 @@ var pairs = [
 	},
 ];
 
-function update_prices(){
+function update_prices_(type, pair){
 	var digits = 3;
+	if(type!="bid"&&type!="ask") return false;
+	var func = (type=="bid"?ripple_get_bestbid:ripple_get_bestask);
+	func(pair.base.currency, pair.base.issuer, pair.counter.currency, pair.counter.issuer, function(price){
+		if(price == null){
+			var text = "-";
+		}else{
+			price = parseFloat(price);
+			if(pair.base.currency == "XRP"){
+				price *= 1000000;
+			}
+			if(pair.counter.currency == "XRP"){
+				price /= 1000000;
+			}
+			var text = price.toFixed(digits-1-Math.floor(Math.LOG10E*Math.log(price)));
+		}
+		$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-"+type).text(text);
+	});
+}
+
+function update_prices(){
 	$.each(pairs, function(key, pair){
-		ripple_get_bestbid(pair.base.currency, pair.base.issuer, pair.counter.currency, pair.counter.issuer, function(price){
-			if(price == null){
-				var text = "-";
-			}else{
-				price = parseFloat(price);
-				if(pair.base.currency == "XRP"){
-					price *= 1000000;
-				}
-				if(pair.counter.currency == "XRP"){
-					price /= 1000000;
-				}
-				var text = price.toFixed(digits-1-Math.floor(Math.LOG10E*Math.log(price)));
-			}
-			$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-bid").text(text);
-		});
-		ripple_get_bestask(pair.base.currency, pair.base.issuer, pair.counter.currency, pair.counter.issuer, function(price){
-			if(price == null){
-				var text = "-";
-			}else{
-				price = parseFloat(price);
-				if(pair.base.currency == "XRP"){
-					price *= 1000000;
-				}
-				if(pair.counter.currency == "XRP"){
-					price /= 1000000;
-				}
-				var text = price.toFixed(digits-1-Math.floor(Math.LOG10E*Math.log(price)));
-			}
-			$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-ask").text(text);
-		});
+		update_prices_("bid", pair);
+		update_prices_("ask", pair);
 	});
 }
 
