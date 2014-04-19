@@ -106,9 +106,11 @@ function update_prices_(type, pair){
 			if(pair.counter.currency == "XRP"){
 				price /= 1000000;
 			}
-			var text = price.toFixed(digits-1-Math.floor(Math.LOG10E*Math.log(price)));
+			var fltdigits = Math.max(digits-1-Math.floor(Math.LOG10E*Math.log(price)), 0);
+			var text = price.toFixed(fltdigits);
+			text += "<span style='font-size:60%;'>"+price.toFixed(fltdigits+2).substr(price.toFixed(fltdigits).length)+"</span>";
 		}
-		$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-"+type).text(text);
+		$("#junk-rippleprices-"+pair.base.currency+pair.base.issuer+pair.counter.currency+pair.counter.issuer+"-"+type).html(text);
 	});
 }
 
