@@ -114,11 +114,14 @@ function update_prices_(type, pair){
 	});
 }
 
+var rippleprice_lastupdate = -1;
+
 function update_prices(){
 	$.each(pairs, function(key, pair){
 		update_prices_("bid", pair);
 		update_prices_("ask", pair);
 	});
+	rippleprice_lastupdate = new Date().getTime();
 }
 
 $(document).ready(function(){
@@ -143,6 +146,13 @@ $(document).ready(function(){
 	$("#junk-rippleprices").append("<div style='clear:both;'></div>");
 	update_prices();
 	setInterval(update_prices, 60*1000);
+	setInterval(function(){
+		var text = "???";
+		if(rippleprice_lastupdate > 0){
+			text = Math.floor((new Date().getTime() - lastupdate)/1000)+" seconds ago";
+		}
+		$("#junk-rippleprices-lastupdate").html(text);
+	}, 100);
 });
 
 
