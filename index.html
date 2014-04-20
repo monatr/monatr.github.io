@@ -13,27 +13,6 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		
 		<script src="js/base.js"></script>
-		<script type="text/javascript">
-			function toggle_tab(id){
-				// Disable all tab.
-				$("#maincontainer section").css({"display":"none"});
-				$("#menubar li a").css({"color":"#999", "background-color":"inherit"});
-				// Get tab DOM.
-				if($("#maincontainer #tabs-"+id).size() <= 0){
-					id = "index";
-				}
-				// Show.
-				$("#maincontainer #tabs-"+id).fadeIn(500);
-				$("#link-"+id).css({"color":"#CCC", "background-color":"#000"});
-			}
-			$(document).ready(function(){
-				toggle_tab(window.location.hash.substr(1));
-			});
-			
-			function number_format(num){
-				return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,');
-			}
-		</script>
 		
 		<title>Home :: Mona Tore Personal Web Site</title>
 		
@@ -109,52 +88,6 @@
 					<li>Difficulty: <span id="junk-monastat-diff">???</span> (<span id="junk-monastat-nethash">???</span>)</li>
 					<li>Block Height: <span id="junk-monastat-blockheight">???</span> (Mined: <span id="junk-monastat-mined">???</span> MONA)</li>
 				</ul>
-				<script type="text/javascript">
-					// Constants definitions.
-					var refresh_interval = 60 * 1000;
-					//
-					var lastupdate = -1;
-					function junk_monastat_refresh_lastupdate(){
-						var text = "???";
-						if(lastupdate > 0){
-							text = Math.floor((new Date().getTime() - lastupdate)/1000)+" seconds ago";
-						}
-						$("#junk-monastat-lastupdate").html(text);
-					}
-					function junk_monastat_update(){
-						lastupdate = new Date().getTime();
-						// Difficulty
-						$.getJSON("http://abe.monash.pw/chain/Monacoin/q/getdifficulty?jsonp=?", function(data){
-							var diff = parseFloat(data);
-							$("#junk-monastat-diff").html(diff);
-							$("#junk-monastat-nethash").html((1e-6*diff*Math.pow(2,32)/90).toFixed(2)+"MH/s");
-						});
-						// Block Height
-						$.getJSON("http://abe.monash.pw/chain/Monacoin/q/getblockcount?jsonp=?", function(data){
-							$("#junk-monastat-blockheight").html(number_format(data));
-						});
-						// Coins Mined
-						$.getJSON("http://abe.monash.pw/chain/Monacoin/q/totalbc?jsonp=?", function(data){
-							$("#junk-monastat-mined").html(number_format(data));
-						});
-						// Hashrate
-						/*
-						$.getJSON("http://abe.monash.pw/chain/Monacoin/q/nethash?jsonp=?", function(data){
-							var tmp = data.pop();
-							// Note:
-							// tmp[5] = hashesToWin, tmp[6] = avgIntervalSinceLast.
-							var nethash = parseFloat(tmp[5]) * 90 / parseFloat(tmp[6]);
-							$("#junk-monastat-nethash").html((nethash*1e-6)+"MH/s");
-						});
-						*/
-					}
-					// Register hooks.
-					$(document).ready(function(){
-						junk_monastat_update();
-						setInterval(junk_monastat_update, refresh_interval);
-						setInterval(junk_monastat_refresh_lastupdate, 100);
-					});
-				</script>
 				<h3>Ripple Prices</h3>
 				<ul><li>Last Update: <span id="junk-rippleprices-lastupdate">???</span></li></ul>
 				<div id="junk-rippleprices"></div>
