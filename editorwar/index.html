@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta name="author" content="もなとれ" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		
+		<!-- Load CSS -->
+		<link rel="stylesheet" type="text/css" href="style.css" media="all" />
+		
+		<!-- Load JavaScript library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script type="text/javascript" src="script.js"></script>
+		
+		<title>モナーコイン ✕ エディタ戦争</title>
+		
+	</head>
+	<body><div id="main-container">
+		
+		<h1>
+			<div style="text-align:left;">Editor</div>
+			<div style="text-align:right;">War</div>
+			<div style="font-size:30px;font-variant:normal;margin-top:30px;">―― Emacs <span style="font-size:75%;">vs.</span> vi ――</div>
+			<div style="font-size:20px;font-variant:normal;margin-top:50px;">もなとれ <a href="https://twitter.com/monatr_jp">@monatr_jp</a></div>
+		</h1>
+		
+		<h2>戦況</h2>
+		
+		<table><tr><td id="cell-emacs">
+			Emacs<br />
+			<img src="img/emacs.png" alt="Emacs" width="250" style="margin-top:10px;" />
+		</td><td id="cell-vi">
+			vi<br /><img src="img/vim.png" alt="vi" width="250" style="margin-top:40px;" />
+		</td></tr><tr><td id="cell-emacs-balance">
+			<span id="balance-emacs">???</span><br />MONA
+		</td><td id="cell-vi-balance">
+			<span id="balance-vi">???</span><br />MONA
+		</td></tr><tr><td style="font-size:80%;"><script type="text/javascript">document.write(
+			"<div><a href='monacoin:"+ADDR_EMACS+"'>"+ADDR_EMACS+"</a></div>" +
+			"<div style='margin-top:1ex;'><a href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fmonatr.github.io%2Feditorwar&text=Emacs%E3%81%AB%E5%AF%84%E4%BB%98%E3%81%97%E3%81%BE%E3%81%99%EF%BC%81%0D%0A"+"%40tipmona%20withdraw%201%20"+ADDR_EMACS+"&hashtags=editorwar,monacoin'>@tipmona</a></div>" +
+			"<div style='margin-top:1ex;font-size:90%;'>" +
+			"[ <a href='http://abe.monash.pw/address/"+ADDR_EMACS+"' target='_BLANK'>Abeで詳細を確認 " +
+			"<img src='img/external-link-grey-light05-Shapes4FREE.png' alt='別窓で開くアイコン' /></a> ]</div>"
+		);</script></td><td style="font-size:80%;"><script type="text/javascript">document.write(
+			"<div><a href='monacoin:"+ADDR_VI+"'>"+ADDR_VI+"</a></div>" +
+			"<div style='margin-top:1ex;'><a href='https://twitter.com/intent/tweet?url=http%3A%2F%2Fmonatr.github.io%2Feditorwar&text=vi%E3%81%AB%E5%AF%84%E4%BB%98%E3%81%97%E3%81%BE%E3%81%99%EF%BC%81%0D%0A"+"%40tipmona%20withdraw%201%20"+ADDR_VI+"&hashtags=editorwar,monacoin'>@tipmona</a></div>" +
+			"<div style='margin-top:1ex;font-size:90%;'>" +
+			"[ <a href='http://abe.monash.pw/address/"+ADDR_VI+"' target='_BLANK'>Abeで詳細を確認 " +
+			"<img src='img/external-link-grey-light05-Shapes4FREE.png' alt='別窓で開くアイコン' /></a> ]</div>"
+		);</script></td></tr></table>
+		
+		<!-- 支配率 -->
+		<div style="text-align:center;"><canvas id="progressbar" width="580" height="30" style="margin-top:15px;"></canvas></div>
+		
+		<h2>趣旨</h2>
+		
+		<p>Emacs か vi か――。</p>
+		<p>歴史の中で幾度となく繰り返された議論に<br />今こそ決着をつけようではないか――。</p>
+		<p>ルールは至極簡単。<br />どちらのエディタがより多くの<br />寄付 MONA を集めることができるのか――。</p>
+		<p>日頃お世話になっているエディタへ感謝を込め、<br />利用の対価を支払う時が、いまここに――。</p>
+		
+		<h2>概要</h2>
+		
+		<ul style="width:500px;">
+			<li>開催期間は 5/6 23:59:59 JST (ゴールデンウィーク最終日) まで。</li>
+			<li>開催期間中により多くの寄付を集めたエディタが勝者となります。</li>
+			<li>集まった寄付金は、晴れて勝者となったエディタの開発者へ全額寄付されます。</li>
+			<li>敗者となったエディタには一切寄付されません。つまり、二つのエディタへの寄付額を合算したものが全て、勝者となったエディタへ寄付されます。</li>
+		</ul>
+		
+		<h2>連絡</h2>
+		
+		<p>ハッシュタグ「#editorwar」「#monacoin」の二つを含むツイートを表示しています。同志と密に連絡を取り合い、熾烈な戦いを生き残りましょう！</p>
+		
+		<div style="text-align:center;margin:30px;"><a href="https://twitter.com/intent/tweet?url=http%3A%2F%2Fmonatr.github.io%2Feditorwar&text=モナーコイン✕エディタ戦争&hashtags=editorwar,monacoin" title="ツイートする"><img src="img/wg_dark_sm_8.png" height="48" alt="Tweet button" /></a></div>
+		
+		<div style="text-align:center;">
+<a class="twitter-timeline" href="https://twitter.com/search?q=%23editorwar+%23monacoin" data-widget-id="460846351635316736">#editorwar #monacoin に関するツイート</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		</div>
+		
+		<hr style="margin-top:80px;" />
+		
+		<footer>
+			<address>Copyright &copy; もなとれ &lt;monatr.jp[MONA]gmail.com&gt; 2014.</address>
+		</footer>
+		
+	</div></body>
+</html>
+
