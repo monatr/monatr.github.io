@@ -1,5 +1,5 @@
 
-var ABE_BASE_URI = "http://abe.monash.pw";
+var ABE_BASE_URI = "http://explorer.cryptopoolmining.com";
 
 var ADDR_EMACS = "MEmacsFQvDi9xdrDE7DLMcLQPTJ1C7Uu5k";
 var ADDR_VI = "MVimXZDdeXSkzqL2FGGxZteX4FjvF6WqLG";
