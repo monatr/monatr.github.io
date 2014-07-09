@@ -39,30 +39,19 @@ $(document).ready(function(){
 	// Update statistics.
 	var update = function(){
 		lastupdate = new Date().getTime();
-		// Difficulty
-		$.getJSON("http://abe.monash.pw/chain/Monacoin/q/getdifficulty?jsonp=?", function(data){
-			var diff = parseFloat(data);
+		// Difficulty, Block Height
+		$.getJSON("http://abe.monash.pw:3000/api/status?q=getInfo", function(data){
+			var diff = parseFloat(data.info.difficulty);
 			$("#junk-monastat-diff").html(diff);
 			$("#junk-monastat-nethash").html((1e-6*diff*Math.pow(2,32)/90).toFixed(2)+"MH/s");
-		});
-		// Block Height
-		$.getJSON("http://abe.monash.pw/chain/Monacoin/q/getblockcount?jsonp=?", function(data){
-			$("#junk-monastat-blockheight").html(number_format(data));
+			var blocks = parseInt(data.info.blocks);
+			$("#junk-monastat-blockheight").html(number_format(blocks));
 		});
 		// Coins Mined
-		$.getJSON("http://abe.monash.pw/chain/Monacoin/q/totalbc?jsonp=?", function(data){
-			$("#junk-monastat-mined").html(number_format(data));
+		$.getJSON("http://abe.monash.pw:3000/api/status?q=getTxOutSetInfo", function(data){
+			var total_amount = parseFloat(data.txoutsetinfo.total_amount);
+			$("#junk-monastat-mined").html(number_format(total_amount));
 		});
-		// Hashrate
-		/*
-		$.getJSON("http://abe.monash.pw/chain/Monacoin/q/nethash?jsonp=?", function(data){
-			var tmp = data.pop();
-			// Note:
-			// tmp[5] = hashesToWin, tmp[6] = avgIntervalSinceLast.
-			var nethash = parseFloat(tmp[5]) * 90 / parseFloat(tmp[6]);
-			$("#junk-monastat-nethash").html((nethash*1e-6)+"MH/s");
-		});
-		*/
 	};
 	update();
 	setInterval(update, REFRESH_INTERVAL);
