@@ -111,7 +111,57 @@ function ripple_get_bestask(pay_currency, pay_issuer, get_currency, get_issuer, 
 	});
 }
 
-$(document).ready(function(){
+function init_monaprices(){
+	// Last update time.
+	var lastupdate = -1;
+	var update_prices = function(){
+		var get_price_html = function(price){
+			var digits = 3;
+			price = parseFloat(price);
+			var fltdigits = Math.max(digits-1-Math.floor(Math.LOG10E*Math.log(price)), 0);
+			var html = "";
+			html += price.toFixed(fltdigits);
+			html += "<span style='font-size:60%;'>"+price.toFixed(fltdigits+2).substr(price.toFixed(fltdigits).length)+"</span>";
+			return html;
+		};
+		// Get BitPay Best Bid price.
+		$.getJSON("https://bitpay.com/api/rates", function(data){
+			var bbb_jpy = 0;
+			data.forEach(function(a){
+				if(a.code == "JPY"){
+					bbb_jpy = parseFloat(a.rate);
+				}
+			});
+			// Update.
+			// もなとれ
+			$.getJSON("https://api.monatr.jp/ticker?market=btc_mona&callback=?", function(data){
+				var bid_html = get_price_html(data.current_bid) + "<br />" + get_price_html(bbb_jpy/data.current_ask) + " <span style='font-size:60%;'>円</span>";
+				$("#junk-monaprices-monatr-bid").html(bid_html);
+				var ask_html = get_price_html(data.current_ask) + "<br />" + get_price_html(bbb_jpy/data.current_bid) + " <span style='font-size:60%;'>円</span>";
+				$("#junk-monaprices-monatr-ask").html(ask_html);
+			});
+			// AllCoin.com - does not support JSONP...
+			/*
+			$.getJSON("https://www.allcoin.com/api2/pair/MONA_BTC", function(data){
+			});
+			*/
+		});
+		
+		// Update last update time.
+		lastupdate = new Date().getTime();
+	};
+	update_prices();
+	setInterval(update_prices, 60*1000);
+	setInterval(function(){
+		var text = "???";
+		if(lastupdate > 0){
+			text = Math.floor((new Date().getTime() - lastupdate)/1000)+" seconds ago";
+		}
+		$("#junk-monaprices-lastupdate").html(text);
+	}, 100);
+}
+
+function init_rippleprices(){
 	// Configurations.
 	var ACCOUNT_SIGHASH = "rUZbgiS4XDBwCM88xwhRdGGioVMhH94nSE";
 	var ACCOUNT_RIPPLETORIHIKIJO = "r3Ng7AXA2zvqfZ8uBruWLS46ohgDyVDcFt";
@@ -206,6 +256,11 @@ $(document).ready(function(){
 		}
 		$("#junk-rippleprices-lastupdate").html(text);
 	}, 100);
+}
+
+$(document).ready(function(){
+	init_monaprices();
+	init_rippleprices();
 });
 
 
