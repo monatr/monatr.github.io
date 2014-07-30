@@ -69,7 +69,7 @@ $(document).ready(function(){
  * Price board.
  ****************************************************************************************************/
 
-var RIPPLEJSONP = "http://ripplejsonp.monatr.jp/?callback=?";
+var RIPPLEJSONP = "http://ripplejsonp.monatr.jp/";
 
 function ripple_get_bid(pay_currency, pay_issuer, get_currency, get_issuer, callback){
 	$.getJSON(RIPPLEJSONP, {
@@ -134,7 +134,7 @@ function init_monaprices(){
 			});
 			// Update.
 			// もなとれ
-			$.getJSON("https://api.monatr.jp/ticker?market=btc_mona&callback=?", function(data){
+			$.getJSON("https://api.monatr.jp/ticker?market=btc_mona", function(data){
 				var bid_html = get_price_html(data.current_bid) + "<br />" + get_price_html(bbb_jpy/data.current_ask) + " <span style='font-size:60%;'>円</span>";
 				$("#junk-monaprices-monatr-bid").html(bid_html);
 				var ask_html = get_price_html(data.current_ask) + "<br />" + get_price_html(bbb_jpy/data.current_bid) + " <span style='font-size:60%;'>円</span>";
