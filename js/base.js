@@ -166,6 +166,7 @@ function init_rippleprices(){
 	var ACCOUNT_SIGHASH = "rUZbgiS4XDBwCM88xwhRdGGioVMhH94nSE";
 	var ACCOUNT_RIPPLETORIHIKIJO = "r3Ng7AXA2zvqfZ8uBruWLS46ohgDyVDcFt";
 	var ACCOUNT_RIPPLETRADEJAPAN = "rMAz5ZnK73nyNUL4foAvaxdreczCkG3vA6";
+	var ACCOUNT_TOKYOJPY = "r94s8px6kSw1uZ1MV98dhSRTvc6VMPoPcN";
 	var ACCOUNT_BITSTAMP = "rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B";
 	var ACCOUNT_JUSTCOIN = "rJHygWcTLVpSXkowott6kzgZU6viQSVYM1";
 	var ACCOUNT_SNAPSWAP = "rMwjYedjc7qqtKYVLiAccJSmCwih4LnE2q";
@@ -181,6 +182,9 @@ function init_rippleprices(){
 	}, {
 		base: {currency: "XRP", issuer: null, label: null},
 		counter: {currency: "JPY", issuer: ACCOUNT_RIPPLETRADEJAPAN, label: "RTJ"},
+	}, {
+		base: {currency: "XRP", issuer: null, label: null},
+		counter: {currency: "JPY", issuer: ACCOUNT_TOKYOJPY, label: "TokyoJPY"},
 	}, {
 		base: {currency: "XRP", issuer: null, label: null},
 		counter: {currency: "USD", issuer: ACCOUNT_BITSTAMP, label: "Bitstamp"},
